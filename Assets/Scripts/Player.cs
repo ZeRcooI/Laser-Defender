@@ -14,6 +14,13 @@ public class Player : MonoBehaviour
     private Vector2 _minBounds;
     private Vector2 _maxBounds;
 
+    private Shooter _shooter;
+
+    private void Awake()
+    {
+        _shooter = GetComponent<Shooter>();
+    }
+
     private void Start()
     {
         InitializedBounds();
@@ -22,6 +29,19 @@ public class Player : MonoBehaviour
     private void Update()
     {
         Move();
+    }
+
+    public void OnMove(InputValue inputValue)
+    {
+        _rawInput = inputValue.Get<Vector2>();
+    }
+
+    public void OnFire(InputValue inputValue)
+    {
+        if(_shooter != null)
+        {
+            _shooter.isFiring = inputValue.isPressed;
+        }
     }
 
     private void InitializedBounds()
@@ -40,10 +60,5 @@ public class Player : MonoBehaviour
         newPosirion.y = Mathf.Clamp(transform.position.y + delta.y, _minBounds.y + _paddingBottom, _maxBounds.y - _paddingTop);
 
         transform.position = newPosirion;
-    }
-
-    public void OnMove(InputValue inputValue)
-    {
-        _rawInput = inputValue.Get<Vector2>();
     }
 }
