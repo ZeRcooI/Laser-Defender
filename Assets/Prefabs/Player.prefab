@@ -167,7 +167,7 @@ MonoBehaviour:
   _moveSpeed: 5
   _paddingLeft: 0.5
   _paddingRight: 0.5
-  _paddingTop: 5
+  _paddingTop: 8
   _paddingBottom: 2
 --- !u!50 &5262597975059789460
 Rigidbody2D:
@@ -243,7 +243,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a2f8d6c7c2a4574ca5b8dbc319d884a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 50
+  _isPlayer: 1
+  _health: 80
+  _score: 0
   _hitEffect: {fileID: 2475548796055846487, guid: 5a6bf7622f1c9cc46b2cb538ebc79c27, type: 3}
   _applyCameraShake: 1
 --- !u!114 &1863340906072382710
