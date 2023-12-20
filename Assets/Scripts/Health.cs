@@ -6,6 +6,17 @@ public class Health : MonoBehaviour
     [SerializeField] private int _health = 50;
     [SerializeField] private ParticleSystem _hitEffect;
 
+    [SerializeField] private bool _applyCameraShake;
+    private CameraShake _cameraShake;
+
+    AudioPlayer _audioPlayer;
+
+    private void Awake()
+    {
+        _cameraShake = Camera.main.GetComponent<CameraShake>();
+        _audioPlayer = FindObjectOfType<AudioPlayer>();
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         DamageDealer damageDealer = collision.GetComponent<DamageDealer>();
@@ -14,7 +25,17 @@ public class Health : MonoBehaviour
         {
             TakeDamage(damageDealer.GetDamage());
             PlayHitEffect();
+            _audioPlayer.PlayDamageClip();
+            ShakeCamera();
             damageDealer.Hit();
+        }
+    }
+
+    private void ShakeCamera()
+    {
+        if(_cameraShake != null && _applyCameraShake)
+        {
+            _cameraShake.Play();
         }
     }
 
